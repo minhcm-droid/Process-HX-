@@ -1,0 +1,15 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Section 700 Hexane Recovery Simulator</title><link rel="stylesheet" href="style.css"></head><body>
+<header><div><b>SECTION 700</b><span>Hexane Recovery Dynamic Simulator</span></div><div id="clock"></div></header>
+<div class="layout"><aside><h3>Chế độ mô phỏng</h3><button onclick="setMode('normal')">▶ Vận hành bình thường</button><button onclick="setMode('startup')">⏫ Startup sequence</button><button onclick="setMode('shutdown')">⏹ Normal shutdown</button><h3>Sự cố</h3><button class="warn" onclick="fault('cw')">Mất CW tại E-704</button><button class="warn" onclick="fault('p706')">Trip P-706A/B</button><button class="warn" onclick="fault('t703p')">T-703 áp suất cao</button><button class="warn" onclick="fault('d712')">D-712 mức cao</button><button class="warn" onclick="fault('water')">Nước T-704 outlet cao</button><button class="danger" onclick="fault('esd')">ESD I-701</button><button onclick="resetAll()">↻ Reset</button><h3>Lớp hiển thị</h3><label><input id="utilityToggle" type="checkbox" checked onchange="toggleUtilities()"> Utility lines</label><label><input id="tagToggle" type="checkbox" checked onchange="toggleTags()"> Instrument tags</label><div class="legend"><i class="hx"></i>Hexane / ML<i class="steam"></i>Steam<i class="cw"></i>CW/BR<i class="n2"></i>N₂<i class="ww"></i>Waste water</div></aside>
+<main><div class="status"><span id="mode">NORMAL</span><span id="alarm">No active alarm</span><span>Animation speed <input id="speed" type="range" min="0" max="3" step=".5" value="1"></span></div>
+<svg id="pfd" viewBox="0 0 1600 820">
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="currentColor"/></marker></defs>
+<g id="pipes">
+<path class="pipe hx" d="M80 180H195M285 180H380M470 180H580M670 180H780M850 180H960M1030 180H1140M1210 180H1330"/>
+<path class="pipe hx" d="M625 235V365H520M455 365H350V525H480M550 525H665M735 525H845M915 525H1030"/>
+<path class="pipe hx" d="M885 580V680H1080M1150 680H1290"/>
+<path class="pipe hx" d="M1180 235V410H1090M1020 410H930"/>
+<g class="utility"><path class="pipe steam" d="M570 75V145M795 75V145M450 440V490M680 440V490M1170 440V500"/><path class="pipe cw" d="M990 75V145M1090 75V145M860 445V490M1280 445V500"/><path class="pipe n2" d="M230 75V145M1340 75V145"/><path class="pipe ww" d="M230 235V315H100V670H260"/></g></g>
+<g id="equipment"></g><g id="valves"></g><g id="tags"></g><g id="particles"></g>
+</svg>
+<div class="panels"><section><h3>Process values</h3><div id="values"></div></section><section><h3>Alarm & corrective action</h3><div id="actions">Hệ thống đang ổn định.</div></section><section><h3>Sequence</h3><ol id="sequence"><li class="active">Hexane washing</li><li>Hexane stripping</li><li>Dehydration</li><li>Low polymer flash</li><li>Oligomer cut / Flaker</li></ol></section></div></main></div><script src="app.js"></script></body></html>
